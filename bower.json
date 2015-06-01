@@ -1,0 +1,8 @@
+{
+	"name": "spring-boot-angularjs-starter",
+	"dependencies": {
+		"angular": "~1.4.0",
+		"angular-resource": "~1.4.0",
+		"bootstrap-css-only": "~3.3.4"
+	}
+}
