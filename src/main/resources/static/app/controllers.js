@@ -13,7 +13,11 @@
       });
       $scope.newItem = "";
     };
-    
+
+    $scope.makeAction = function(){
+
+    }
+
     $scope.updateItem = function(item) {
       item.$update();
     };
