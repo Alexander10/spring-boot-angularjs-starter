@@ -19,20 +19,26 @@ public class ItemController {
     return repo.findAll();
   }
   
-  @RequestMapping(method = RequestMethod.POST)
-  public Item addItem(@RequestBody Item item) {
-    item.setId(null);
-    return repo.saveAndFlush(item);
-  }
-  
-  @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-  public Item updateItem(@RequestBody Item updatedItem, @PathVariable Integer id) {
-    updatedItem.setId(id);
-    return repo.saveAndFlush(updatedItem);
-  }
+//  @RequestMapping(method = RequestMethod.POST)
+//  public Item addItem(@RequestBody Item item) {
+//    item.setId(null);
+//    return repo.saveAndFlush(item);
+//  }
+//
+//  @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+//  public Item updateItem(@RequestBody Item updatedItem, @PathVariable Integer id) {
+//    updatedItem.setId(id);
+//    return repo.saveAndFlush(updatedItem);
+//  }
   
   @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
   public void deleteItem(@PathVariable Integer id) {
     repo.delete(id);
+  }
+
+
+  @RequestMapping(value = "/search", method = RequestMethod.GET)
+  public  List<Item> searchData(){
+    return repo.findAll();
   }
 }

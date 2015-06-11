@@ -14,4 +14,14 @@
   
   ItemFactory.$inject = ['$resource'];
   angular.module("myApp.services").factory("Item", ItemFactory);
+
+  var CustomActionHandler = function($resource){
+    return $resource('/items/search', {
+
+
+    });
+  };
+
+  CustomActionHandler.$inject = ['$resource'];
+  angular.module("myApp.services").factory("CustomActionHandler", ItemFactory);
 }(angular));
