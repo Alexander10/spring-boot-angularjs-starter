@@ -36,6 +36,7 @@ public class GoogleScholarCitationReaderTest {
 	@Test
 	public void testSearchData() throws Exception {
 		 CitationRecord record = (CitationRecord) reader.searchData(PAPER_NAME);
+		assertNotNull(record);
 	}
 
 	@Test

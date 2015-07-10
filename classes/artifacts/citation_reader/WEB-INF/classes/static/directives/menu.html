@@ -1,0 +1,14 @@
+<div class="navbar navbar-default ">
+	<ul class="nav navbar-nav">
+		<li ng-repeat="menu in menus" ng-class="{dropdown: menu.menus}">
+			<a ui-sref="{{menu.action}}" ng-class="{'dropdown-toggle': menu.menus}" data-toggle="dropdown">{{menu.title}}
+				<span class="caret"></span>
+			</a>
+			<ul ng-if="menu.menus" class="dropdown-menu">
+				<li ng-repeat="submenu in menu.menus">
+					<a ui-sref="{{submenu.action}}">{{submenu.title}}</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>

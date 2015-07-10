@@ -1,0 +1,77 @@
+<div ng-controller="UserAgentCtrl">
+	<form class="form-horizontal" ng-submit="addItem(userAgentItem)">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Name:</label>
+
+			<div class="col-sm-10">
+				<input type="text" class="form-control" ng-model="userAgentItem.name" placeholder="Name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Version:</label>
+
+			<div class="col-sm-10">
+				<input type="text" class="form-control" ng-model="userAgentItem.version" placeholder="Version">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Operating system:</label>
+
+			<div class="col-sm-10">
+				<input type="text" class="form-control" ng-model="userAgentItem.operatingSystem"
+					   placeholder="operatingSystem">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-10">
+				<button type="submit" ng-click="addRandomItem(row)" class="btn btn-sm btn-success">
+					<i class="glyphicon glyphicon-plus">
+					</i> Add item
+				</button>
+			</div>
+		</div>
+	</form>
+
+
+	<table ng-table="tableParams" class="table table-striped">
+		<thead>
+		<tr>
+			<th>Name</th>
+			<th>Version</th>
+			<th>Operating System</th>
+			<th>Action</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="item in $data">
+			<td data-title="'Name'">
+				<span ng-if="!item.$edit">{{item.name}}</span>
+				<div ng-if="item.$edit"><input class="form-control" type="text" ng-model="item.name" /></div>
+			</td>
+			<td data-title="'Version'">
+				<span ng-if="!item.$edit">{{item.version}}</span>
+				<div ng-if="item.$edit"><input class="form-control" type="text" ng-model="item.version" /></div>
+			</td>
+			<td data-title="'Operating System'">
+				<span ng-if="!item.$edit">{{item.operatingSystem}}</span>
+				<div ng-if="item.$edit"><input class="form-control" type="text" ng-model="item.operatingSystem" /></div>
+			</td>
+			<td data-title="Action">
+
+				<buton ng-if="!item.$edit" type="button" ng-click="item.$edit = true" class="btn btn-sm btn-primary">
+					<i class="glyphicon glyphicon-edit">
+					</i>
+				</buton>
+				<buton ng-if="item.$edit" type="button" ng-click="updateItem(item)" class="btn btn-sm btn-primary">
+					<i class="glyphicon glyphicon-save">
+					</i>
+				</buton>
+				<button type="button" ng-click="removeItem(item)" class="btn btn-sm btn-danger" alt="Remove">
+					<i class="glyphicon glyphicon-remove-circle">
+					</i>
+				</button>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>

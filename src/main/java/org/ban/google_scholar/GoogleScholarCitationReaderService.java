@@ -74,8 +74,11 @@ public class GoogleScholarCitationReaderService extends GoogleScholarReader<Cita
 		return 0;
 	}
 
-	private String readNextPageURL() {
-		 Elements pager =
+	private String readNextPageURL(Document document) {
+		Element pager = document.select(".gs_ico_nav_current").get(0);
+		Element nextSibling = pager.parent().nextElementSibling();
+
+		return nextSibling != null ? nextSibling.select("a").attr("href") : "";
 	}
 
 	/**
@@ -88,12 +91,11 @@ public class GoogleScholarCitationReaderService extends GoogleScholarReader<Cita
 	@Async
 	private Future<List<CitationRecord>> readCitations(String query, int cntOfCitations) throws IOException {
 		List<CitationRecord> records = new ArrayList<>();
-		int page = 0;
 		String url = Constants.GOOGLE_SCHOLAR_BASE_URL + query;
+		Document htmlDoc = getHtmlDocument(url);
 
-		for (int i = 0; i < cntOfCitations; i = page * 10) {
+		for (int page = 0; (page * 10) < cntOfCitations; page++) {
 
-			Document htmlDoc = getHtmlDocument(url);
 			Elements citations = htmlDoc.select(Constants.CITATION_RECORD_WRAPPER_CLASS);
 
 			if (citations.size() > 0) {
@@ -104,8 +106,14 @@ public class GoogleScholarCitationReaderService extends GoogleScholarReader<Cita
 				}
 			}
 
-			page++;
+			String pageURL = readNextPageURL(htmlDoc);
+			if (pageURL.isEmpty()) {
+				return new AsyncResult<>(records);
+			}
+
+			htmlDoc = getHtmlDocument(Constants.GOOGLE_SCHOLAR_BASE_URL + pageURL);
 		}
+
 		return new AsyncResult<>(records);
 	}
 }

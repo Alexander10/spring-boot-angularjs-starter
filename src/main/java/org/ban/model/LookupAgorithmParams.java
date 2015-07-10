@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -13,13 +15,14 @@ import javax.persistence.Id;
  * Date: 11. 6. 2015
  * Time: 15:08
  */
-@Document
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class LookupAgorithmParams {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
 	private String userAgentDefinition;

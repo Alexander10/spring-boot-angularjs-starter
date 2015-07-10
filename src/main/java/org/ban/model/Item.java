@@ -1,21 +1,26 @@
 package org.ban.model;
 
-import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Document
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Item {
-  @Id
-  private String id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-  private boolean checked;
+	@Column
+	private boolean checked;
 
-  private String description;
+	@Column
+	private String description;
 
 }
